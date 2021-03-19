@@ -1,0 +1,26 @@
+{
+  "name": "simple-device-management-backend",
+  "version": "1.0.0",
+  "description": "Simple CRUD backend server using NodeJS, MySQL and Sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index",
+    "start": "node src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arttorres0/simple-device-management-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arttorres0/simple-device-management-backend/issues"
+  },
+  "homepage": "https://github.com/arttorres0/simple-device-management-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
