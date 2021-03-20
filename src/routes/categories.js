@@ -3,4 +3,5 @@ module.exports = (routes) => {
 
   routes.post("/categories", categories.create);
   routes.get("/categories", categories.findAll);
+  routes.delete("/categories/:categoryId", categories.delete);
 };

@@ -10,7 +10,6 @@ exports.create = async (req, res) => {
     const category = await Category.create(categoryReqInfo);
     return res.send({ category, message: "Category saved successfully." });
   } catch (err) {
-    console.log(err);
     if (err instanceof Sequelize.UniqueConstraintError) {
       return res.status(409).send({ message: "Duplicated category name." });
     } else if (err instanceof Sequelize.DatabaseError) {
@@ -45,9 +44,29 @@ exports.findAll = async (req, res) => {
       numberOfResults: categories.count,
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).send({
       message: err.message || "Error getting list of categories.",
+    });
+  }
+};
+
+exports.delete = async (req, res) => {
+  try {
+    const category = await Category.findByPk(req.params.categoryId);
+    if (category) {
+      category.destroy();
+      // TODO: delete all devices with the deleted category (?)
+      return res.send({
+        message: "Category deleted successfully.",
+      });
+    } else {
+      return res.status(404).send({
+        message: "Category not found.",
+      });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      message: "Error deleting category.",
     });
   }
 };
