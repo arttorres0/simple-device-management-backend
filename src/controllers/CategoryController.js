@@ -23,3 +23,31 @@ exports.create = async (req, res) => {
     });
   }
 };
+
+exports.findAll = async (req, res) => {
+  var filterName = req.query.name || "";
+  var page = req.query.page || 1;
+  var pageSize = 10;
+
+  try {
+    const categories = await Category.findAndCountAll({
+      limit: pageSize,
+      offset: pageSize * page - pageSize,
+      where: Sequelize.where(Sequelize.fn("lower", Sequelize.col("name")), {
+        [Sequelize.Op.like]: "%" + filterName.toLowerCase() + "%",
+      }),
+    });
+
+    return res.send({
+      categories: categories.rows,
+      page,
+      pageSize: pageSize,
+      numberOfResults: categories.count,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({
+      message: err.message || "Error getting list of categories.",
+    });
+  }
+};
