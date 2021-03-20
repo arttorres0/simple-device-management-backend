@@ -11,6 +11,7 @@ const Category = db.define("category", {
   name: {
     type: Sequelize.STRING(128),
     allowNull: false,
+    unique: true,
   },
 });
 
