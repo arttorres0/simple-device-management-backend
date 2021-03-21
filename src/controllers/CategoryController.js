@@ -55,7 +55,6 @@ exports.delete = async (req, res) => {
     const category = await Category.findByPk(req.params.categoryId);
     if (category) {
       category.destroy();
-      // TODO: delete all devices with the deleted category (?)
       return res.send({
         message: "Category deleted successfully.",
       });
