@@ -66,3 +66,23 @@ exports.findAll = async (req, res) => {
     });
   }
 };
+
+exports.delete = async (req, res) => {
+  try {
+    const device = await Device.findByPk(req.params.deviceId);
+    if (device) {
+      device.destroy();
+      return res.send({
+        message: "Device deleted successfully.",
+      });
+    } else {
+      return res.status(404).send({
+        message: "Device not found.",
+      });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      message: "Error deleting device.",
+    });
+  }
+};
