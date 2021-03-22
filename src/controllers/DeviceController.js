@@ -71,7 +71,7 @@ exports.delete = async (req, res) => {
   try {
     const device = await Device.findByPk(req.params.deviceId);
     if (device) {
-      device.destroy();
+      await device.destroy();
       return res.send({
         message: "Device deleted successfully.",
       });
