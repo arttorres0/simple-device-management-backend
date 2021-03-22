@@ -4,6 +4,9 @@ const db = require("./database/db");
 const routes = require("./routes/index");
 const { port } = require("./config");
 const bodyParser = require("body-parser");
+const cors = require("cors");
+
+app.use(cors());
 
 app.listen(port, () => {
   console.log("Server running on port: " + port);

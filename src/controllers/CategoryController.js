@@ -54,7 +54,7 @@ exports.delete = async (req, res) => {
   try {
     const category = await Category.findByPk(req.params.categoryId);
     if (category) {
-      category.destroy();
+      await category.destroy();
       return res.send({
         message: "Category deleted successfully.",
       });
